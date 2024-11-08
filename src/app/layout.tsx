@@ -31,9 +31,10 @@ export default function RootLayout({
             w="full"
             h={"full"}
             minH={"100dvh"}
-            overflowX={"hidden"}
+            // overflowX={"hidden"}
           >
             <Flex
+              maxW={{ base: "100%", md: "1250px" }}
               w={{ base: "100%", md: "1250px" }}
               px={{ base: "16px", md: "0px" }}
             >

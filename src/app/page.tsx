@@ -9,15 +9,15 @@ import { Flex } from "@chakra-ui/react";
 
 export default function Home() {
   return (
-    <Flex flexDir={"column"} flex={1} gap={"24px"}>
+    <Flex flexDir={"column"} flex={1} gap={"24px"} pb={"30px"}>
       <Header />
       <Flex flexDir={"column"} gap={"24px"}>
         <CurrentSection />
-        <Flex gap={"24px"}>
+        <Flex flexDir={{ base: "column", sm: "row" }} gap={"24px"}>
           <AreaSection />
           <NextPredictionSection />
         </Flex>
-        <Flex gap={"24px"}>
+        <Flex flexDir={{ base: "column", md: "row" }} gap={"24px"}>
           <DesertificationSpeedAheadSection />
           <DustStormFrequencySection />
         </Flex>

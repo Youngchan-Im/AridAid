@@ -13,20 +13,19 @@ export default function AreaSection() {
       borderRadius={{ base: "20px", md: "40px" }}
       bg={`lightgray -8.69px -385.902px / 103.231% 430.131%, #F0F8FF`}
       bgImage={"/assets/map.png"}
-      bgPos={"bottom right"}
+      bgPos={{ base: "right", sm: "center", md: "bottom right" }}
       bgSize={"cover"}
       bgRepeat={"no-repeat"}
-      minW={"401px"}
-      maxW={"401px"}
-      minH={"443px"}
+      maxW={{ base: "100%", md: "401px" }}
+      minH={{ base: "350px", sm: "200px", md: "443px" }}
       h={"auto"}
       border={"1px solid #EBEBEB"}
-      boxShadow={"0px 0px 10px 0px rgba(0, 0, 0, 0.08)"}
+      boxShadow={"0px 0px 10px 0px rgba(46, 41, 41, 0.08)"}
     >
       <Text
         color={"#000"}
         fontSize={"24px"}
-        fontWeight={600}
+        fontWeight={900}
         lineHeight={"1.4"}
       >{`China's Desertification Prediction Analysis Area`}</Text>
       <Flex flexDir={"column"}>

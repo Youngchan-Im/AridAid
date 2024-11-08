@@ -19,14 +19,14 @@ export default function CurrentSection() {
       h={"auto"}
       rowGap={"10px"}
       border={"1px solid #EBEBEB"}
-      boxShadow={"0px 0px 10px 0px rgba(0, 0, 0, 0.08)"}
+      boxShadow={"0px 0px 10px 0px rgba(83, 74, 74, 0.08)"}
     >
       <Flex flexDir={"column"} rowGap={"32px"}>
         <Flex flexDir={"column"} rowGap={"4px"}>
           <Text
             color={"#000"}
             fontSize={"24px"}
-            fontWeight={600}
+            fontWeight={900}
             lineHeight={"1.4"}
           >
             Current Analysis of Desertification in China

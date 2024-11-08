@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useMemo, useRef } from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -14,6 +14,8 @@ import {
   Legend,
   ChartData,
 } from "chart.js";
+import { ValueType } from "@/constants/future-desertification-predictions-data";
+import { AspectRatio } from "@chakra-ui/react";
 
 ChartJS.register(
   CategoryScale,
@@ -26,19 +28,17 @@ ChartJS.register(
   Legend
 );
 
-const LineChart = () => {
-  const chartRef = useRef(null);
-  const labels = ["1", "2", "3", "4", "5", " 10"];
-  const data = [0, -1.0, -2.0, -3.0, -4.0, -5.0];
+const LineChart = ({ data }: { data: ValueType[] }) => {
+  const x = useMemo(() => data?.map((v) => `${v.yearsAhead}`), [data]); // years
+  const y = useMemo(() => data?.map((v) => v.precipitationChange), [data]); // data
 
   const chartData = {
-    labels,
+    labels: x,
     datasets: [
       {
         label: "(mm)",
-        data,
+        data: y,
         borderColor: "black",
-        // backgroundColor에 그라데이션 설정
         backgroundColor: (context: any) => {
           const chart = context.chart;
           const { ctx, chartArea } = chart;
@@ -46,19 +46,18 @@ const LineChart = () => {
           if (!chartArea) {
             return null;
           }
-          // 아래로 채워질 그라데이션 생성
           const gradient = ctx.createLinearGradient(
             0,
             chartArea.top,
             0,
             chartArea.bottom
           );
-          gradient.addColorStop(0, "rgba(255, 255, 255, 0)"); // 위쪽 투명
-          gradient.addColorStop(1, "rgba(128, 128, 128, 0.3)"); // 아래쪽 회색 음영
+          gradient.addColorStop(0, "rgba(255, 255, 255, 0)");
+          gradient.addColorStop(1, "rgba(128, 128, 128, 0.3)");
 
           return gradient;
         },
-        fill: true, // fill을 true로 설정하여 배경색으로 채우기
+        fill: true,
         tension: 0.4,
         pointRadius: 0,
         pointHoverRadius: 0,
@@ -76,8 +75,7 @@ const LineChart = () => {
     },
     scales: {
       x: {
-        // display: false,
-        offset: false, // x축 양끝에 offset을 준다
+        offset: false,
       },
       y: {
         beginAtZero: false,
@@ -102,7 +100,11 @@ const LineChart = () => {
     },
   };
 
-  return <Line ref={chartRef} data={chartData} options={options} />;
+  return (
+    <AspectRatio ratio={3 / 1} maxW={"100%"} w={"100%"}>
+      <Line data={chartData} options={options} />
+    </AspectRatio>
+  );
 };
 
 export default LineChart;

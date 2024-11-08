@@ -1,8 +1,15 @@
+"use client";
+
 import { Flex, Select, Text } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import BarChart from "./charts/bar-chart";
+import {
+  DataByYearType,
+  FUTURE_DESERTIFICATION_PREDICTIONS_BY_YEAR,
+} from "@/constants/future-desertification-predictions-data";
 
 export default function DesertificationSpeedAheadSection() {
+  const [option, setOption] = useState<number>(1);
   return (
     <Flex
       as={"section"}
@@ -13,18 +20,25 @@ export default function DesertificationSpeedAheadSection() {
       py={{ base: "20px", md: "35px" }}
       borderRadius={{ base: "20px", md: "40px" }}
       bgColor={"#F6F6F6"}
-      w={"100%"}
+      flex={1}
       minH={"443px"}
       h={"auto"}
       border={"1px solid #EBEBEB"}
       boxShadow={"0px 0px 10px 0px rgba(0, 0, 0, 0.08)"}
     >
-      <Flex justify={"space-between"} flex={1} maxH={"60px"} h={"100%"}>
+      <Flex
+        flexDir={{ base: "column", md: "row" }}
+        rowGap={{ base: "16px", md: "0px" }}
+        justify={"space-between"}
+        flex={1}
+        maxH={{ base: "auto", md: "60px" }}
+        h={"100%"}
+      >
         <Flex flexDir={"column"} rowGap={"4px"}>
           <Text
             color={"#000"}
             fontSize={"24px"}
-            fontWeight={600}
+            fontWeight={900}
             lineHeight={"1.4"}
           >
             {`Desertification Speed Ahead`}
@@ -39,7 +53,7 @@ export default function DesertificationSpeedAheadSection() {
           </Text>
         </Flex>
         <Select
-          placeholder="Select Year"
+          alignSelf={"flex-end"}
           defaultValue={selectOptions[0]}
           maxW={"120px"}
           bgColor={"#EBEBEB"}
@@ -48,28 +62,30 @@ export default function DesertificationSpeedAheadSection() {
           fontWeight={500}
           lineHeight={"1.6"}
           letterSpacing={"-0.32px"}
+          onChange={(e) => {
+            setOption(Number(e.target.value));
+          }}
         >
-          {selectOptions.map((option) => {
+          {selectOptions.map((opt) => {
             return (
-              <option key={`year-${option}`} value={option}>
-                {option}
+              <option key={`year-${opt}`} value={opt}>
+                {`${opt} Year${opt === 1 ? "" : "s"}`}
               </option>
             );
           })}
         </Select>
       </Flex>
       <Flex w={"100%"} maxH={"285px"} h={"100%"}>
-        <BarChart />
+        <BarChart
+          data={
+            FUTURE_DESERTIFICATION_PREDICTIONS_BY_YEAR[
+              `${option}` as keyof DataByYearType
+            ]
+          }
+        />
       </Flex>
     </Flex>
   );
 }
 
-const selectOptions = [
-  "1year",
-  "2years",
-  "3years",
-  "4years",
-  "5years",
-  "10years",
-];
+const selectOptions = [1, 2, 3, 4, 5, 10];
