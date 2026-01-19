@@ -1,0 +1,3 @@
+# app
+
+Layouts & Pages directory
